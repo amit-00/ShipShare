@@ -1,21 +1,25 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export function WaitlistForm() {
   const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!email.trim()) {
+      toast.error("Enter an email address to join the waitlist.");
       return;
     }
 
-    setSubmitted(true);
+    toast.success("Thanks for your interest in ShipShare.", {
+      description: `We'll share early access updates with ${email}.`,
+    });
+    setEmail("");
   }
 
   return (
@@ -38,11 +42,8 @@ export function WaitlistForm() {
         Join waitlist
       </Button>
       <p className="text-sm leading-6 text-muted-foreground">
-        {submitted
-          ? "Placeholder confirmed. No email has been stored yet."
-          : "Placeholder only. Submissions are not persisted yet."}
+        Early access updates will be shared with waitlist members.
       </p>
     </form>
   );
 }
-

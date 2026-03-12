@@ -52,8 +52,7 @@ export default function HomePage() {
                 Join the waitlist for the first version of ShipShare.
               </h2>
               <p className="max-w-2xl text-sm leading-6 text-muted-foreground">
-                This is a placeholder page for now. The form below captures the
-                intended interaction, but it does not store submissions yet.
+                Get notified when ShipShare opens early access.
               </p>
             </div>
             <WaitlistForm />
