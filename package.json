@@ -1,0 +1,11 @@
+{
+  "name": "shipshare",
+  "private": true,
+  "packageManager": "pnpm@10.17.0",
+  "scripts": {
+    "dev": "pnpm --filter @shipshare/web dev",
+    "build": "pnpm --filter @shipshare/web build",
+    "start": "pnpm --filter @shipshare/web start"
+  }
+}
+
