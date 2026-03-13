@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 export default function HomePage() {
   return (
     <main className="min-h-screen border-t border-border bg-background">
-      <header className="bg-card">
+      <header className="bg-background">
         <div className="container flex h-16 items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-8 w-8 items-center justify-center rounded-md border border-border bg-background text-sm font-semibold">
@@ -18,14 +18,14 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section className="bg-card">
+      <section className="bg-background">
         <div className="container py-24">
           <div className="mx-auto flex max-w-3xl flex-col items-center space-y-8 text-center">
             <div className="inline-flex rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
               Introducing ShipShare.dev
             </div>
             <div className="space-y-8">
-              <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-6xl max-w-md mx-auto">
+              <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-6xl max-w-lg mx-auto">
                 Ship your code. Share your story.
               </h1>
               <p className="text-lg leading-8 text-muted-foreground tracking-wide max-w-xs mx-auto">

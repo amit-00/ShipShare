@@ -1,7 +1,14 @@
 import type { Metadata } from "next";
+import { Mona_Sans } from "next/font/google";
 
 import "@/app/globals.css";
 import { Toaster } from "@/components/ui/sonner";
+
+const monaSans = Mona_Sans({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "ShipShare",
@@ -16,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={`${monaSans.variable} font-sans`}>
         {children}
         <Toaster />
       </body>
