@@ -3,7 +3,7 @@ from django.db import models
 
 
 class User(AbstractUser):
-    username = models.CharField(max_length=150, blank=True, null=True, unique=False)
+    username = models.CharField(max_length=150, blank=True, null=True, unique=True)
     email = models.EmailField(blank=True, null=True)
     onboarding_completed = models.BooleanField(default=False)
     plan_tier = models.CharField(max_length=32, default="free")
