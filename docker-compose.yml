@@ -1,0 +1,57 @@
+services:
+  core-app:
+    build:
+      context: ./apps/core-app
+    container_name: shipshare-core-app
+    working_dir: /app
+    command: >
+      sh -c "mkdir -p /app/data &&
+      python manage.py migrate --noinput &&
+      python manage.py runserver 0.0.0.0:8000"
+    environment:
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-local-dev-secret-key}
+      DJANGO_DEBUG: ${DJANGO_DEBUG:-true}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,core-app}
+      DJANGO_DB_ENGINE: django.db.backends.sqlite3
+      DJANGO_DB_NAME: /app/data/db.sqlite3
+      DJANGO_TIME_ZONE: ${DJANGO_TIME_ZONE:-UTC}
+      GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
+      GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
+      GITHUB_OAUTH_REDIRECT_URI: ${GITHUB_OAUTH_REDIRECT_URI:-http://localhost:8000/auth/github/callback/}
+      GITHUB_OAUTH_SCOPE: ${GITHUB_OAUTH_SCOPE:-read:user user:email}
+      GITHUB_OAUTH_TOKEN_ENCRYPTION_KEY: ${GITHUB_OAUTH_TOKEN_ENCRYPTION_KEY:-}
+      GITHUB_APP_ID: ${GITHUB_APP_ID:-}
+      GITHUB_APP_SLUG: ${GITHUB_APP_SLUG:-}
+      GITHUB_APP_PRIVATE_KEY: ${GITHUB_APP_PRIVATE_KEY:-}
+      GITHUB_APP_INSTALL_URL: ${GITHUB_APP_INSTALL_URL:-}
+      INTERNAL_SHARED_SECRET: ${INTERNAL_SHARED_SECRET:-shipshare-internal-secret}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./apps/core-app:/app
+      - core_app_data:/app/data
+
+  github-webhook-app:
+    build:
+      context: ./apps/github-webhook-app
+    container_name: shipshare-github-webhook-app
+    working_dir: /app
+    command: >
+      sh -c "mkdir -p /app/data &&
+      uvicorn webhook_app.main:app --host 0.0.0.0 --port 8001"
+    depends_on:
+      - core-app
+    environment:
+      GITHUB_WEBHOOK_SECRET: ${GITHUB_WEBHOOK_SECRET:-local-webhook-secret}
+      DJANGO_INTERNAL_BASE_URL: ${DJANGO_INTERNAL_BASE_URL:-http://core-app:8000}
+      INTERNAL_SHARED_SECRET: ${INTERNAL_SHARED_SECRET:-shipshare-internal-secret}
+      WEBHOOK_DELIVERY_DB_PATH: /app/data/webhook-deliveries.sqlite3
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./apps/github-webhook-app:/app
+      - webhook_app_data:/app/data
+
+volumes:
+  core_app_data:
+  webhook_app_data:

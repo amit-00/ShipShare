@@ -1,0 +1,19 @@
+[project]
+name = "shipshare-github-webhook-app"
+version = "0.1.0"
+description = "FastAPI webhook ingress for ShipShare GitHub installation sync."
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115.0,<1.0.0",
+  "httpx>=0.28.0",
+  "uvicorn>=0.34.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
