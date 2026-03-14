@@ -11,12 +11,9 @@ dependencies = [
   "PyJWT>=2.10.0",
 ]
 
-[project.optional-dependencies]
-dev = [
-  "pytest>=8.0.0",
-  "pytest-django>=4.9.0",
-]
-
 [build-system]
 requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["core_app", "github_integration", "identity"]

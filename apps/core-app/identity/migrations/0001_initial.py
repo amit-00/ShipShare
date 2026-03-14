@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ("is_staff", models.BooleanField(default=False, help_text="Designates whether the user can log into this admin site.", verbose_name="staff status")),
                 ("is_active", models.BooleanField(default=True, help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.", verbose_name="active")),
                 ("date_joined", models.DateTimeField(default=django.utils.timezone.now, verbose_name="date joined")),
-                ("username", models.CharField(blank=True, max_length=150, null=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()])),
+                ("username", models.CharField(blank=True, max_length=150, null=True, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()])),
                 ("email", models.EmailField(blank=True, max_length=254, null=True)),
                 ("onboarding_completed", models.BooleanField(default=False)),
                 ("plan_tier", models.CharField(default="free", max_length=32)),
