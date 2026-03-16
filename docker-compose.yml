@@ -1,20 +1,20 @@
 services:
-  core-app:
+  core:
     build:
       context: .
-      dockerfile: apps/core-app/Dockerfile
-    container_name: shipshare-core-app
+      dockerfile: apps/core/Dockerfile
+    container_name: shipshare-core
     working_dir: /workspace
     command: >
-      sh -c "mkdir -p /workspace/apps/core-app/data &&
-      uv run --frozen --package shipshare-core-app python apps/core-app/manage.py migrate --noinput &&
-      uv run --frozen --package shipshare-core-app python apps/core-app/manage.py runserver 0.0.0.0:8000"
+      sh -c "mkdir -p /workspace/apps/core/data &&
+      uv run --frozen --package shipshare-core python apps/core/manage.py migrate --noinput &&
+      uv run --frozen --package shipshare-core python apps/core/manage.py runserver 0.0.0.0:8000"
     environment:
       DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-local-dev-secret-key}
       DJANGO_DEBUG: ${DJANGO_DEBUG:-true}
-      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,core-app}
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,core}
       DJANGO_DB_ENGINE: django.db.backends.sqlite3
-      DJANGO_DB_NAME: /workspace/apps/core-app/data/db.sqlite3
+      DJANGO_DB_NAME: /workspace/apps/core/data/db.sqlite3
       DJANGO_TIME_ZONE: ${DJANGO_TIME_ZONE:-UTC}
       GITHUB_CLIENT_ID: ${GITHUB_CLIENT_ID:-}
       GITHUB_CLIENT_SECRET: ${GITHUB_CLIENT_SECRET:-}
@@ -30,7 +30,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/workspace
-      - core_app_data:/workspace/apps/core-app/data
+      - core_data:/workspace/apps/core/data
 
   github-webhook-app:
     build:
@@ -42,10 +42,10 @@ services:
       sh -c "mkdir -p /workspace/apps/github-webhook-app/data &&
       uv run --frozen --package shipshare-github-webhook-app uvicorn webhook_app.main:app --host 0.0.0.0 --port 8001"
     depends_on:
-      - core-app
+      - core
     environment:
       GITHUB_WEBHOOK_SECRET: ${GITHUB_WEBHOOK_SECRET:-local-webhook-secret}
-      DJANGO_INTERNAL_BASE_URL: ${DJANGO_INTERNAL_BASE_URL:-http://core-app:8000}
+      DJANGO_INTERNAL_BASE_URL: ${DJANGO_INTERNAL_BASE_URL:-http://core:8000}
       INTERNAL_SHARED_SECRET: ${INTERNAL_SHARED_SECRET:-shipshare-internal-secret}
       WEBHOOK_DELIVERY_DB_PATH: /workspace/apps/github-webhook-app/data/webhook-deliveries.sqlite3
     ports:
@@ -55,5 +55,5 @@ services:
       - webhook_app_data:/workspace/apps/github-webhook-app/data
 
 volumes:
-  core_app_data:
+  core_data:
   webhook_app_data:

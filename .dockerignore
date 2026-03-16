@@ -6,7 +6,7 @@
 node_modules
 apps/web/.next
 apps/web/node_modules
-apps/core-app/.venv
+apps/core/.venv
 apps/github-webhook-app/.venv
 .venv
 __pycache__/
@@ -19,5 +19,5 @@ __pycache__/
 coverage
 dist
 *.log
-apps/core-app/data
+apps/core/data
 apps/github-webhook-app/data

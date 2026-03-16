@@ -4,7 +4,7 @@ requires-python = ">=3.12"
 
 [manifest]
 members = [
-    "shipshare-core-app",
+    "shipshare-core",
     "shipshare-github-webhook-app",
     "shipshare-python-workspace",
 ]
@@ -446,9 +446,9 @@ wheels = [
 ]
 
 [[package]]
-name = "shipshare-core-app"
+name = "shipshare-core"
 version = "0.1.0"
-source = { editable = "apps/core-app" }
+source = { editable = "apps/core" }
 dependencies = [
     { name = "cryptography" },
     { name = "django" },

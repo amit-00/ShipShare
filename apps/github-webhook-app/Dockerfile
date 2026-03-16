@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir --upgrade pip uv
 WORKDIR /workspace
 
 COPY pyproject.toml uv.lock .python-version ./
-COPY apps/core-app apps/core-app
+COPY apps/core apps/core
 COPY apps/github-webhook-app apps/github-webhook-app
 
 RUN uv sync --frozen --no-dev --package shipshare-github-webhook-app

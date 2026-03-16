@@ -16,6 +16,6 @@ package = false
 
 [tool.uv.workspace]
 members = [
-  "apps/core-app",
+  "apps/core",
   "apps/github-webhook-app",
 ]

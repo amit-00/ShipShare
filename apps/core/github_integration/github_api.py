@@ -25,7 +25,7 @@ class GitHubAppClient:
             timeout=httpx.Timeout(10.0),
             headers={
                 "Accept": "application/vnd.github+json",
-                "User-Agent": "ShipShare core-app",
+                "User-Agent": "ShipShare core",
                 "X-GitHub-Api-Version": "2022-11-28",
             },
         )

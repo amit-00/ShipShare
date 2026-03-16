@@ -1,5 +1,5 @@
 [project]
-name = "shipshare-core-app"
+name = "shipshare-core"
 version = "0.1.0"
 description = "Django core service for ShipShare identity, installations, and repository tracking."
 requires-python = ">=3.12"

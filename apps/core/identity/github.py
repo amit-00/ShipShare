@@ -75,7 +75,7 @@ class GitHubOAuthClient:
             timeout=httpx.Timeout(10.0),
             headers={
                 "Accept": "application/vnd.github+json",
-                "User-Agent": "ShipShare core-app",
+                "User-Agent": "ShipShare core",
             },
         )
 

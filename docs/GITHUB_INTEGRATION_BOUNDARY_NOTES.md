@@ -2,7 +2,7 @@
 
 This repo now contains two backend services for the GitHub identity and installation MVP:
 
-- `apps/core-app`
+- `apps/core`
   - owns users, GitHub OAuth identity, GitHub App installation state, repositories, and tracked repo selections
 - `apps/github-webhook-app`
   - owns public GitHub webhook ingress, signature verification, delivery deduplication, event normalization, and trusted forwarding to Django

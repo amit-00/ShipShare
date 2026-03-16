@@ -10,15 +10,15 @@ RUN pip install --no-cache-dir --upgrade pip uv
 WORKDIR /workspace
 
 COPY pyproject.toml uv.lock .python-version ./
-COPY apps/core-app apps/core-app
+COPY apps/core apps/core
 COPY apps/github-webhook-app apps/github-webhook-app
 
-RUN uv sync --frozen --no-dev --package shipshare-core-app
+RUN uv sync --frozen --no-dev --package shipshare-core
 
 ENV PATH="/opt/venv/bin:${PATH}"
 
-WORKDIR /workspace/apps/core-app
+WORKDIR /workspace/apps/core
 
 EXPOSE 8000
 
-CMD ["uv", "run", "--frozen", "--package", "shipshare-core-app", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["uv", "run", "--frozen", "--package", "shipshare-core", "python", "manage.py", "runserver", "0.0.0.0:8000"]
